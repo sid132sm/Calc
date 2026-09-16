@@ -33,7 +33,7 @@ Production-oriented calculator application scaffold using React, Django REST Fra
    python manage.py runserver
    ```
 
-The development API is available at `http://localhost:8000/`. API endpoints will be added under `/api/v1/` with calculator functionality.
+The development API is available at `http://localhost:8000/`. The calculator uses `POST /api/v1/calculate/` with a JSON body such as `{ "expression": "2+3×4" }`; it returns `{ "result": "14" }`.
 
 ## Frontend setup
 
@@ -44,6 +44,7 @@ npm run dev
 ```
 
 Vite serves the application at `http://localhost:5173/` by default.
+Set `VITE_CALCULATOR_API_URL` if the backend API is hosted somewhere other than `http://localhost:8000/api/v1/calculate/`.
 
 ## Layout
 

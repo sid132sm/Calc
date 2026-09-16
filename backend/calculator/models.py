@@ -4,7 +4,7 @@ from django.db import models
 
 
 class Calculation(models.Model):
-    """Persisted calculation history; evaluation is implemented in a later phase."""
+    """Persisted calculation history for expressions evaluated by the API."""
 
     class AngleMode(models.TextChoices):
         DEGREES = "deg", "Degrees"
