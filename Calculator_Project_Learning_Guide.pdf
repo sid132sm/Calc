@@ -1,0 +1,432 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R 18 0 R] /Count 7 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Length 4020 >>
+stream
+BT
+/F2 22 Tf 1 0 0 1 54.0 738.0 Tm (Calculator Project: a beginner-friendly guided tour) Tj
+/F1 11 Tf 1 0 0 1 54.0 708.0 Tm (A guided explanation of the React + Django calculator) Tj
+/F2 15 Tf 1 0 0 1 54.0 678.0 Tm (1. What you built) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 656.0 Tm (This is a small full-stack web application: a React user interface sends a math expression) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 643.0 Tm (to a Django REST API, and Django returns a result. For example, when the user enters 2+3x4) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 630.0 Tm (\(the screen uses the multiplication symbol x\), the browser sends JSON to the API. The API) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 617.0 Tm (validates and evaluates it, then replies with JSON containing 14.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 600.0 Tm (The application has three layers:) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 583.0 Tm (Browser \(React + TypeScript + CSS, port 5173\)) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 572.0 Tm (-> HTTP POST with JSON) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 561.0 Tm (Django REST API \(Python, port 8000\)) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 550.0 Tm (-> SQL when history is used) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 539.0 Tm (PostgreSQL database) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 522.0 Tm (The calculator works without writing history to the database today. The Calculation model) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 509.0 Tm (and migration are the prepared foundation for a future history feature.) Tj
+/F2 15 Tf 1 0 0 1 54.0 484.0 Tm (2. Concepts before files) Tj
+/F2 11.5 Tf 1 0 0 1 54.0 458.0 Tm (Frontend, backend, and API) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 441.0 Tm (The frontend is the part people see and click. It runs in the browser. React helps it redraw) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 428.0 Tm (the screen when data changes. TypeScript is JavaScript with extra checks while you develop.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 411.0 Tm (The backend runs on a server, not in the browser. Django receives requests, applies business) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 398.0 Tm (rules, and replies. An API is the agreed interface between the two programs. Here the) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 385.0 Tm (agreement is:) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 368.0 Tm (POST /api/v1/calculate/) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 357.0 Tm (Content-Type: application/json) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 346.0 Tm () Tj
+/F3 8.1 Tf 1 0 0 1 62.0 335.0 Tm ({ "expression": "2+3x4" }) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 324.0 Tm () Tj
+/F3 8.1 Tf 1 0 0 1 62.0 313.0 Tm (Success: { "result": "14" }) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 302.0 Tm (Invalid input: { "detail": "Enter a valid expression." }) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 285.0 Tm (JSON is a text data format. It resembles a JavaScript object, but it is sent as text across) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 272.0 Tm (the network. HTTP POST means "send data for this action".) Tj
+/F2 11.5 Tf 1 0 0 1 54.0 251.0 Tm (Development servers) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 234.0 Tm (In development two servers run at the same time. Vite runs React on port 5173; Django runs) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 221.0 Tm (the API on port 8000. A browser normally blocks a page from one origin from calling another) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 208.0 Tm (origin. CORS is the server permission that lets the Vite origin call Django during local) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 195.0 Tm (development.) Tj
+/F2 15 Tf 1 0 0 1 54.0 170.0 Tm (3. Project map) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 148.0 Tm (Django_calculator/) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 137.0 Tm (backend/ Django server) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 126.0 Tm (config/ project-wide routing and settings) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 115.0 Tm (calculator/ one Django app: calculator domain) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 104.0 Tm (api/ HTTP endpoint and its URL) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 93.0 Tm (services/ reusable calculation business logic) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 82.0 Tm (migrations/ database change history) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 71.0 Tm (tests/ automated checks) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 60.0 Tm (frontend/ Vite + React browser application) Tj
+/F1 8 Tf 1 0 0 1 54 24 Tm (Calculator Project Learning Guide | Page 1 of 7) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 3 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 4360 >>
+stream
+BT
+/F3 8.1 Tf 1 0 0 1 62.0 738.0 Tm (src/App.tsx calculator screen and interaction logic) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 727.0 Tm (src/styles/ CSS organized by responsibility) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 716.0 Tm (requirements.txt Python packages) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 705.0 Tm (run_server.sh convenience script for Django) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 694.0 Tm (run_frontend.sh convenience script for Vite) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 683.0 Tm (.env private local configuration \(do not commit\)) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 672.0 Tm (.env.example safe template for .env) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 655.0 Tm (A Django *project* is the whole server configuration \(backend/config\). A Django *app* is one) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 642.0 Tm (focused feature area \(backend/calculator\). Larger Django projects often have apps such as) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 629.0 Tm (accounts, orders, and payments alongside their config folder.) Tj
+/F2 15 Tf 1 0 0 1 54.0 604.0 Tm (4. How one calculation travels through the app) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 582.0 Tm (- 1. The user clicks = or presses Enter.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 567.0 Tm (- 2. input\("="\) in frontend/src/App.tsx calls calculate\(\).) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 552.0 Tm (- 3. fetch\(\) makes a POST request, converts { expression } to JSON, and waits) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 537.0 Tm (with await for Django's response.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 520.0 Tm (- 4. Django's top-level config/urls.py matches api/v1/ and includes the) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 505.0 Tm (calculator app's URLs.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 488.0 Tm (- 5. calculator/api/urls.py matches calculate/ and dispatches to) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 473.0 Tm (CalculateView.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 456.0 Tm (- 6. CalculateView.post\(\) verifies that expression is a string and calls) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 441.0 Tm (evaluate\(expression\).) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 424.0 Tm (- 7. The evaluator tokenizes only allowed numbers and operators, applies normal) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 409.0 Tm (multiplication/division precedence, and returns a formatted string result.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 392.0 Tm (- 8. Django REST Framework serializes { "result": "14" } as JSON.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 377.0 Tm (- 9. React reads the response, stores the old expression in previous, stores) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 362.0 Tm (the result in expression, and React redraws the display.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 345.0 Tm (If any input or network step fails, the frontend shows Error. The backend returns a 400) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 332.0 Tm (status for invalid expressions instead of crashing.) Tj
+/F2 15 Tf 1 0 0 1 54.0 307.0 Tm (5. Backend walkthrough) Tj
+/F2 11.5 Tf 1 0 0 1 54.0 281.0 Tm (backend/manage.py) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 264.0 Tm (This is Django's command-line entry point. python manage.py runserver, migrate,) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 251.0 Tm (makemigrations, test, and createsuperuser all start here. The important line sets) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 238.0 Tm (DJANGO_SETTINGS_MODULE to config.settings.development, selecting local-development settings.) Tj
+/F2 11.5 Tf 1 0 0 1 54.0 217.0 Tm (backend/config/settings/) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 200.0 Tm (base.py contains shared configuration. development.py imports it and turns on DEBUG, local) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 187.0 Tm (hosts, and CORS. production.py imports it but keeps DEBUG off and adds a few security) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 174.0 Tm (headers. This separation avoids accidentally deploying developer-friendly settings.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 157.0 Tm (Key choices in base.py:) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 140.0 Tm (- BASE_DIR locates the repository root. load_dotenv\(\) reads its .env.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 125.0 Tm (- SECRET_KEY signs Django security data. The fallback value is acceptable) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 110.0 Tm (only locally; production must use a long secret from environment variables.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 93.0 Tm (- INSTALLED_APPS enables Django built-ins plus corsheaders, DRF) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 78.0 Tm (\(rest_framework\), and this project's calculator app.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 61.0 Tm (- MIDDLEWARE is an ordered request/response pipeline. CORS middleware is) Tj
+/F1 8 Tf 1 0 0 1 54 24 Tm (Calculator Project Learning Guide | Page 2 of 7) Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 3 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 4744 >>
+stream
+BT
+/F1 9.4 Tf 1 0 0 1 54.0 738.0 Tm (placed early so browser permission headers are added properly.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 721.0 Tm (- DATABASES reads PostgreSQL connection values from environment variables.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 706.0 Tm (- REST_FRAMEWORK restricts this API to JSON in and JSON out.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 691.0 Tm (development.py permits exactly http://localhost:5173 and http://127.0.0.1:5173. If Vite uses) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 678.0 Tm (another origin, add that precise origin. Do not use a permissive CORS policy in a real) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 665.0 Tm (deployed application.) Tj
+/F2 11.5 Tf 1 0 0 1 54.0 644.0 Tm (Routing: config/urls.py and calculator/api/urls.py) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 627.0 Tm (URL routing maps an incoming path to Python code. The project-level router owns the broad) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 614.0 Tm (prefixes: /admin/ is Django's admin; /api/v1/ belongs to the calculator app. include\(\)) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 601.0 Tm (delegates the remainder, so the app router sees calculate/. This keeps each app portable and) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 588.0 Tm (its URLs together.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 571.0 Tm (CalculateView.as_view\(\) converts the view class into a callable Django can route to. DRF) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 558.0 Tm (then invokes its post\(\) method for POST requests.) Tj
+/F2 11.5 Tf 1 0 0 1 54.0 537.0 Tm (API view: calculator/api/views.py) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 520.0 Tm (APIView is a DRF base class. request.data is parsed JSON; unlike raw Django it is convenient) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 507.0 Tm (for API bodies. The view implements a deliberately thin controller:) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 490.0 Tm (- validate that expression is a string;) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 475.0 Tm (- delegate calculation to the service;) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 460.0 Tm (- turn success or a known ExpressionError into a JSON Response.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 445.0 Tm (authentication_classes = [] and permission_classes = [] intentionally make this endpoint) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 432.0 Tm (public. Add real authentication before attaching calculations to user accounts. The current) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 419.0 Tm (view does not save a Calculation record.) Tj
+/F2 11.5 Tf 1 0 0 1 54.0 398.0 Tm (Service: calculator/services/evaluator.py) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 381.0 Tm (Business logic is outside the view so it can be tested without HTTP and reused by future) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 368.0 Tm (endpoints, command-line jobs, or other code. The most important security decision is: it) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 355.0 Tm (does not use Python eval\(\). eval would execute arbitrary Python-like input and is unsafe for) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 342.0 Tm (user data.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 325.0 Tm (The evaluator's algorithm is a small two-stack calculator:) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 308.0 Tm (- 1. strip\(\) removes edge whitespace and enforces a 200-character maximum.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 293.0 Tm (- 2. TOKEN_PATTERN recognizes only decimal numbers and +, -, x, /) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 278.0 Tm (symbols \(the actual code uses multiplication and division glyphs\).) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 261.0 Tm (- 3. Joining all matched tokens must reproduce the expression exactly. Therefore) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 246.0 Tm (spaces inside the expression, letters, parentheses, and JavaScript such as alert\(1\) are) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 233.0 Tm (rejected.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 216.0 Tm (- 4. Number tokens go into values; operator tokens go into pending.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 201.0 Tm (- 5. Before a new operator is added, pending operators of equal or higher) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 186.0 Tm (priority are applied. This makes multiplication/division happen before addition/subtraction) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 173.0 Tm (and makes same-priority operators left-associative.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 156.0 Tm (- 6. apply\(\) pops left value, operator, and right value, then pushes the result.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 141.0 Tm (- 7. Division by zero and non-finite results are clear errors. .12g formats a) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 126.0 Tm (float with up to 12 significant digits and returns a string suitable for the JSON API.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 109.0 Tm (Leading negatives work because -8/2 is treated as 0-8/2. Unary negatives in other positions,) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 96.0 Tm (parentheses, percentage, exponentiation, and scientific functions are not supported yet.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 83.0 Tm (That is intentional scope, not a Django limit.) Tj
+/F1 8 Tf 1 0 0 1 54 24 Tm (Calculator Project Learning Guide | Page 3 of 7) Tj
+ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 3 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 4307 >>
+stream
+BT
+/F2 11.5 Tf 1 0 0 1 54.0 738.0 Tm (Data model: calculator/models.py) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 721.0 Tm (Calculation describes a database table, even though the API currently does not create rows.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 708.0 Tm (Django will use the model when history is added.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 691.0 Tm (- id: a UUID primary key; harder to guess than sequential numeric IDs.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 676.0 Tm (- device_id: a client/device identifier, indexed for efficient history lookup.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 661.0 Tm (- expression: what the user typed.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 646.0 Tm (- normalized_expression: a future-friendly canonical version.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 631.0 Tm (- result: saved output.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 616.0 Tm (- angle_mode: deg or rad, ready for future trig functions.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 601.0 Tm (- created_at: set automatically on creation and indexed.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 586.0 Tm (Meta.ordering = ["-created_at"] means newer calculations appear first by default. The) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 573.0 Tm (composite index \(device_id, -created_at\) supports the common question "show this device's) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 560.0 Tm (newest history" efficiently.) Tj
+/F2 11.5 Tf 1 0 0 1 54.0 539.0 Tm (Migration: calculator/migrations/0001_initial.py) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 522.0 Tm (A migration is a version-controlled recipe for changing the database schema. This initial) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 509.0 Tm (migration creates the Calculation table and its index. Never casually edit a migration after) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 496.0 Tm (it has been used by other environments. Instead:) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 479.0 Tm (- 1. Change models.py.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 464.0 Tm (- 2. Run python manage.py makemigrations calculator.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 449.0 Tm (- 3. Inspect the new migration.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 434.0 Tm (- 4. Run python manage.py migrate.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 419.0 Tm (- 5. Commit the model and migration together.) Tj
+/F2 11.5 Tf 1 0 0 1 54.0 400.0 Tm (Admin and app setup) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 383.0 Tm (apps.py identifies this app to Django and defines the default numeric key type for models) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 370.0 Tm (that do not choose their own key. admin.py registers Calculation, so staff users can inspect) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 357.0 Tm (it in /admin/ after an admin account is created.) Tj
+/F2 11.5 Tf 1 0 0 1 54.0 336.0 Tm (Tests: calculator/tests/test_evaluator.py) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 319.0 Tm (SimpleTestCase needs no database, making these tests fast. They check normal precedence,) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 306.0 Tm (leading negatives, division-by-zero rejection, and rejection of unknown characters. Run them) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 293.0 Tm (with:) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 276.0 Tm (cd backend) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 265.0 Tm (python manage.py test calculator) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 248.0 Tm (Useful next tests: decimals, long input, repeated operators, API status codes, and) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 235.0 Tm (allowed/disallowed CORS origins.) Tj
+/F2 15 Tf 1 0 0 1 54.0 210.0 Tm (6. Frontend walkthrough) Tj
+/F2 11.5 Tf 1 0 0 1 54.0 184.0 Tm (Vite files and packages) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 167.0 Tm (package.json lists dependencies and commands. npm run dev starts the development server; npm) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 154.0 Tm (run build runs TypeScript checks and creates an optimized production bundle in dist/; npm) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 141.0 Tm (run lint checks code style/rules.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 124.0 Tm (vite.config.ts enables the React plugin. index.html has one important empty element, <div) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 111.0 Tm (id="root">. React takes control inside that element.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 94.0 Tm (tsconfig.json points to separate browser \(tsconfig.app.json\) and Vite/Node) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 81.0 Tm (\(tsconfig.node.json\) settings. strict: true asks TypeScript to find more mistakes before a) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 68.0 Tm (browser sees them. noEmit: true means TypeScript checks types while Vite handles the actual) Tj
+/F1 8 Tf 1 0 0 1 54 24 Tm (Calculator Project Learning Guide | Page 4 of 7) Tj
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 3 0 R >> >> /Contents 11 0 R >>
+endobj
+13 0 obj
+<< /Length 4744 >>
+stream
+BT
+/F1 9.4 Tf 1 0 0 1 54.0 738.0 Tm (bundling.) Tj
+/F2 11.5 Tf 1 0 0 1 54.0 717.0 Tm (src/main.tsx) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 700.0 Tm (This is the frontend entry point. createRoot\(...\).render\(...\) starts React in the root div.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 687.0 Tm (StrictMode adds development-only checks and can intentionally re-run certain work to expose) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 674.0 Tm (unsafe side effects. BrowserRouter prepares client-side routing; this small app has no) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 661.0 Tm (routes yet, so it is future-ready. Finally, the shared CSS entry file is imported once.) Tj
+/F2 11.5 Tf 1 0 0 1 54.0 640.0 Tm (React state in src/App.tsx) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 623.0 Tm (A React component is a function that returns UI. React calls it again after a state update,) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 610.0 Tm (then efficiently updates only the DOM differences.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 593.0 Tm (useState creates values that survive renders:) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 576.0 Tm (- expression: the currently visible number/expression, initially "0".) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 561.0 Tm (- previous: the last completed expression for the smaller display line.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 546.0 Tm (- justCalculated: tells digit entry to begin a new expression after =.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 531.0 Tm (- isCalculating: prevents duplicate input while the API request is active.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 516.0 Tm (setExpression does not change the screen instantly in-place. It asks React to schedule a new) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 503.0 Tm (render. The functional form, such as setExpression\(\(value\) => ...\), is used when the new) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 490.0 Tm (value depends on the previous value; that avoids stale-state problems.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 473.0 Tm (Operator is a TypeScript union: only four exact strings are valid operators. The operators) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 460.0 Tm (array is used to recognize them at runtime.) Tj
+/F2 11.5 Tf 1 0 0 1 54.0 439.0 Tm (Button input behavior) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 422.0 Tm (input\(key\) centralizes all calculator behavior, so mouse buttons and the keyboard act) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 409.0 Tm (consistently. It handles clear, backspace, equals, sign toggle, operator replacement, one) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 396.0 Tm (decimal point per current number, and regular digit entry. The buttons are data in an array) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 383.0 Tm (and .map\(\) turns each into a React <button>, avoiding repeated markup.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 366.0 Tm (The class name chooses a visual type such as key--operator or key--equals. The button's key) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 353.0 Tm (prop helps React identify each item in the mapped list; it does not become an HTML attribute) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 340.0 Tm (for the user.) Tj
+/F2 11.5 Tf 1 0 0 1 54.0 319.0 Tm (Calling Django with fetch) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 302.0 Tm (calculate is marked async, so it can use await. It:) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 285.0 Tm (- 1. sets the loading state;) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 270.0 Tm (- 2. uses fetch with POST, a JSON content-type header, and a JSON body;) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 255.0 Tm (- 3. parses the JSON response;) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 240.0 Tm (- 4. rejects either non-2xx HTTP responses or missing results;) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 225.0 Tm (- 5. updates display state on success, otherwise shows Error;) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 210.0 Tm (- 6. always clears loading in finally.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 195.0 Tm (The endpoint is configurable through VITE_CALCULATOR_API_URL. Vite exposes environment) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 182.0 Tm (variables prefixed VITE_ to client-side code. This matters: never put a secret in a VITE_) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 169.0 Tm (variable because the browser can read it.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 152.0 Tm (There is a configuration mismatch worth fixing: .env.example defines VITE_API_BASE_URL,) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 139.0 Tm (while App.tsx reads VITE_CALCULATOR_API_URL. The latter works through its localhost) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 126.0 Tm (fallback, but an environment file following the example will not override the URL. Choose) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 113.0 Tm (one name and use it in both places.) Tj
+/F2 11.5 Tf 1 0 0 1 54.0 92.0 Tm (Keyboard support and effects) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 75.0 Tm (useEffect is for work outside React rendering. Here it registers a browser keydown listener) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 62.0 Tm (after React renders and returns a cleanup function that removes it. That cleanup prevents) Tj
+/F1 8 Tf 1 0 0 1 54 24 Tm (Calculator Project Learning Guide | Page 5 of 7) Tj
+ET
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 3 0 R >> >> /Contents 13 0 R >>
+endobj
+15 0 obj
+<< /Length 4491 >>
+stream
+BT
+/F1 9.4 Tf 1 0 0 1 54.0 738.0 Tm (duplicate listeners after later renders or when the component unmounts. The dependency) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 725.0 Tm ([isCalculating] refreshes the listener when the loading state changes.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 708.0 Tm (The mapping translates standard keyboard * and / into the screen's x and division symbols,) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 695.0 Tm (maps Enter to equals, Escape to clear, and Backspace to the backspace control.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 682.0 Tm (preventDefault\(\) avoids a browser default behavior such as navigating back on Backspace.) Tj
+/F2 11.5 Tf 1 0 0 1 54.0 661.0 Tm (CSS organization) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 644.0 Tm (CSS is split by responsibility:) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 627.0 Tm (- tokens.css: global design tokens and automatic light/dark color variables.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 612.0 Tm (- reset.css: predictable browser defaults, including box-sizing.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 597.0 Tm (- layout.css: root and application minimum heights.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 582.0 Tm (- calculator.css: this calculator component's visual rules.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 567.0 Tm (- index.css: imports the first three shared layers.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 552.0 Tm (The calculator layout uses CSS Grid. grid-template-columns: repeat\(4, 1fr\) creates four) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 539.0 Tm (equal columns. The equals key spans two columns. clamp\(\) keeps the display type responsive,) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 526.0 Tm (min\(\) keeps the card from becoming too wide, and the media query adjusts spacing on narrow) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 513.0 Tm (screens. :focus-visible is an important keyboard-accessibility detail: a focused key has a) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 500.0 Tm (visible outline.) Tj
+/F2 15 Tf 1 0 0 1 54.0 475.0 Tm (7. Running the project locally) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 453.0 Tm (Prerequisites are Python 3.12+, Node.js 20+, and PostgreSQL 16+ according to the project) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 440.0 Tm (README. In the project root:) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 423.0 Tm (cp .env.example .env) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 412.0 Tm (python3 -m venv .venv) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 401.0 Tm (source .venv/bin/activate) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 390.0 Tm (pip install -r requirements.txt) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 379.0 Tm (cd backend) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 368.0 Tm (python manage.py migrate) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 357.0 Tm (python manage.py runserver) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 340.0 Tm (In another terminal:) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 323.0 Tm (cd Django_calculator/frontend) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 312.0 Tm (npm install) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 301.0 Tm (npm run dev) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 284.0 Tm (Open the Vite URL \(normally http://localhost:5173\). You need PostgreSQL running with) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 271.0 Tm (credentials matching .env before migrate or server database checks can succeed. Keep .env) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 258.0 Tm (private; it contains secrets and passwords.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 241.0 Tm (The helper scripts do the same basic work. run_server.sh activates .venv, migrates, then) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 228.0 Tm (starts Django. run_frontend.sh installs packages then starts Vite. For faster repeated) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 215.0 Tm (frontend starts, use npm run dev directly after the first install. The scripts currently) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 202.0 Tm (contain absolute /root/... paths, so they need updating if the project is moved or shared) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 189.0 Tm (with another developer.) Tj
+/F2 15 Tf 1 0 0 1 54.0 164.0 Tm (8. Debugging checklist) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 142.0 Tm (If the screen shows Error, use the browser DevTools Network tab. Confirm the request URL,) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 129.0 Tm (request JSON, HTTP status, and response body. A browser-console CORS message usually means) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 116.0 Tm (the Vite origin is absent from CORS_ALLOWED_ORIGINS.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 99.0 Tm (If Django will not start, first activate the virtual environment, then confirm pip install) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 86.0 Tm (-r requirements.txt completed. Configuration errors often come from a missing .env or) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 73.0 Tm (unavailable PostgreSQL database. Use python manage.py check for Django's built-in) Tj
+/F1 8 Tf 1 0 0 1 54 24 Tm (Calculator Project Learning Guide | Page 6 of 7) Tj
+ET
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 3 0 R >> >> /Contents 15 0 R >>
+endobj
+17 0 obj
+<< /Length 4341 >>
+stream
+BT
+/F1 9.4 Tf 1 0 0 1 54.0 738.0 Tm (configuration checks.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 721.0 Tm (If React does not refresh, check the terminal running Vite and the browser console. Run npm) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 708.0 Tm (run build for TypeScript errors and npm run lint for lint errors. The exact error message is) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 695.0 Tm (usually more useful than guessing.) Tj
+/F2 15 Tf 1 0 0 1 54.0 670.0 Tm (9. A repeatable blueprint for future projects) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 648.0 Tm (Use the same separation of responsibilities:) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 631.0 Tm (React component -> API client/function -> Django view -> service -> model/database) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 614.0 Tm (For a new feature, begin with a small user story, then define the API contract before UI) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 601.0 Tm (details. Keep views thin; put real rules in named service functions; validate every external) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 588.0 Tm (input on the server; add tests for the service and API; and make environment-dependent) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 575.0 Tm (values configurable rather than hard-coded.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 558.0 Tm (For example, to add calculation history:) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 541.0 Tm (- 1. Decide the API shape, e.g. POST returns a saved id and GET returns recent) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 526.0 Tm (calculations for a device or authenticated user.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 509.0 Tm (- 2. Validate a device id \(or introduce Django authentication\).) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 494.0 Tm (- 3. In the view, call evaluate, then create Calculation.objects.create\(...\).) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 479.0 Tm (- 4. Add a list endpoint, queryset filtering, pagination, and serializers.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 464.0 Tm (- 5. Add frontend state for history, a fetch on load, loading/error UI, and a) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 449.0 Tm (history component.) Tj
+/F1 9.4 Tf 1 0 0 1 64.0 432.0 Tm (- 6. Add tests before relying on the feature.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 417.0 Tm (For more calculator operations, do not expand the API view into a long parser. Extend or) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 404.0 Tm (replace the evaluator with a clearly tested tokenizer/parser. Decide which grammar you) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 391.0 Tm (support, limit input size/complexity, and keep arbitrary-code execution impossible.) Tj
+/F2 15 Tf 1 0 0 1 54.0 366.0 Tm (10. Learning path and useful commands) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 344.0 Tm (Learn in this order: HTML/CSS basics; JavaScript functions, arrays, promises, and) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 331.0 Tm (async/await; React components/state/effects; HTTP and JSON; Python functions/exceptions;) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 318.0 Tm (Django URLs/views/models/migrations; then tests, authentication, deployment, and security.) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 301.0 Tm (# Backend) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 290.0 Tm (cd backend) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 279.0 Tm (python manage.py test calculator) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 268.0 Tm (python manage.py check) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 257.0 Tm (python manage.py makemigrations) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 246.0 Tm (python manage.py migrate) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 235.0 Tm (python manage.py createsuperuser) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 224.0 Tm () Tj
+/F3 8.1 Tf 1 0 0 1 62.0 213.0 Tm (# Frontend) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 202.0 Tm (cd frontend) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 191.0 Tm (npm run dev) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 180.0 Tm (npm run build) Tj
+/F3 8.1 Tf 1 0 0 1 62.0 169.0 Tm (npm run lint) Tj
+/F2 15 Tf 1 0 0 1 54.0 144.0 Tm (11. Key takeaways) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 122.0 Tm (The frontend should manage presentation and user interaction; the backend must be the source) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 109.0 Tm (of truth for rules and validation. Data crosses the boundary as a small documented API) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 96.0 Tm (contract. Keep code focused: route URLs, views coordinate, services hold business logic,) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 83.0 Tm (models describe stored data, migrations record schema changes, and tests protect behavior.) Tj
+/F1 9.4 Tf 1 0 0 1 54.0 70.0 Tm (This calculator is a concise but solid template for many future full-stack projects.) Tj
+/F1 8 Tf 1 0 0 1 54 24 Tm (Calculator Project Learning Guide | Page 7 of 7) Tj
+ET
+endstream
+endobj
+18 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 3 0 R >> >> /Contents 17 0 R >>
+endobj
+xref
+0 19
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000162 00000 n 
+0000000232 00000 n 
+0000000307 00000 n 
+0000004379 00000 n 
+0000004525 00000 n 
+0000008937 00000 n 
+0000009083 00000 n 
+0000013879 00000 n 
+0000014026 00000 n 
+0000018386 00000 n 
+0000018534 00000 n 
+0000023331 00000 n 
+0000023479 00000 n 
+0000028023 00000 n 
+0000028171 00000 n 
+0000032565 00000 n 
+trailer
+<< /Size 19 /Root 1 0 R >>
+startxref
+32713
+%%EOF
